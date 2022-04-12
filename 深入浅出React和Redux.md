@@ -56,3 +56,69 @@ constructor(props) {
 ### jsx的优缺点 p17
 ### eject p19
 ### props和state p27
+### 组件声明周期 p35
+### flux p50
+### redux 66
+要更新页面渲染，就要更新应用状态，但是不是直接去改值，而是根据逻辑返回一个新的值给redux，由redux完成新的组装
+`reducer(state, action)`根据state（上一次的结果）和这一次的元素状态产生一个新的状态
+reducer是纯函数，结果只能由state和action决定，而且还不能修改state和action
+
+### 无状态组件 p75
+### 纯函数组件 p76
+
+### provider p78
+### react-redux connect p81
+### react代码组织规范 p90 
+按功能组织模块很有意思，就好像vue中如果我们要加一个功能模块
+我们要在views里增加一个文件夹，在router里增加一个，在stores里也增加一个，如果像mango里还有什么api，config，那在对应的地方都要增加，这样当然可以完成功能
+但是在模块之间相互依赖的时候，如果A模块依赖了B模块的内容，那么可能要导入好几个文件，比如api和config，但是如果按照功能组织，可以把对外接口放到index里统一暴露，也就是说，一个模块内部包含了全部的内容，对外也有统一的接口
+```js
+// 按角色组织
+/config
+  /a
+  /b
+/api
+  /a
+  /b
+/views
+  /a
+  /b
+/components
+  /a
+  /b
+// b模块依赖a的内容
+import aconfig from "../config/a"
+import aapi from "../api/a"
+import acomponent from "../api/a"
+```
+如果a模块有修改，那么怎么确保不影响其他的模块呢，比如api文件夹不叫api了，改成interface，b模块也要改，但是实际a模块并没有改对外接口
+```js
+// 按功能组织
+a/
+  /api
+  /config
+  /views
+  /components
+  index
+    import api from "./api"
+    import config from "./config"
+    import components from "./components"
+    export api.x1
+    export config.x2
+    export components.x3
+b/
+  /api
+  /config
+  /views
+  /components
+  index
+// 在每个模块的index里完成对外接口的暴露，那么在别的模块要引入的时候，只需要引入对外接口，模块内部的修改只要不影响对外接口就可以了
+import { x1, x2, x3 } from "./a/index"
+```
+
+### 状态树设计 92
+### combineReducer 98
+### 性能优化 115
+### 性能优化之shouldComponentUpdate 120
+### diff 127
+### 高级组件 139
