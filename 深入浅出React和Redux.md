@@ -51,3 +51,8 @@ constructor(props) {
 <button onClick={() => this.buttonClick()}
 ```
 这样就可以调用到当前class的的函数了，但是这样每次render的时候都会创建一个匿名函数，其实并不提倡。
+
+
+### jsx的优缺点 p17
+### eject p19
+### props和state p27
