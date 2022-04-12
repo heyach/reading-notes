@@ -122,3 +122,38 @@ import { x1, x2, x3 } from "./a/index"
 ### 性能优化之shouldComponentUpdate 120
 ### diff 127
 ### 高级组件 139
+一个函数，接受一个组件作为参数，返回一个新的增强功能的组件
+有称这个函数为高阶组件的，也有称这个新组件为高阶组件的，这个函数称为高阶组件工厂函数
+```js
+import React from "react"
+function removeUserProp(WrappedComponent) {
+  return class WrappingComponent extends React.Component {
+    render() {
+      const {
+        user,
+        ...otherProps
+      } = this.props
+      return <WrappedComponent {otherProps}>
+    }
+  }
+}
+```
+新的组件跟原来组件功能基本一致，就是去掉了user这个prop
+```js
+const newCom = removeUserProp(oldCom)
+// 这样就相当于定义了一个新的组件
+```
+
+### react的slot
+组件包含的内容作为组件的props.children使用
+```js
+<CountDown>
+  {
+    (count) => <div>{count}</div>
+  }
+</CountDown>
+```
+
+### 与服务器通信 157
+### 单元测试 190
+### 同构，服务端渲染 245
