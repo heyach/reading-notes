@@ -22,6 +22,11 @@ git stash pop stash{0}
 git reset --soft HEAD^
 ```
 
+* 强行恢复到上一个版本
+```js
+git reset --hard HEAD^
+```
+
 * 撤销add
 ```js
 git reset HEAD file
@@ -32,6 +37,11 @@ git reset HEAD file
 git checkout branch
 git reset --hard commitA
 git push -f
+```
+
+* 本地git创建的仓库关联完成仓库
+```js
+git remote add origin git@github.com:xxx.git
 ```
 
 ### rebase
